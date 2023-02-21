@@ -13,14 +13,14 @@ router.post("/", validation(joiSchema), controllerWrapper(ctrl.addContact));
 router.delete("/:contactId", controllerWrapper(ctrl.removeContact));
 
 router.put(
-  "/:contactId",
-  validation(joiSchema),
-  controllerWrapper(ctrl.updateContactById)
+    "/:contactId",
+    validation(joiSchema),
+    controllerWrapper(ctrl.updateContactById)
 );
 
 router.patch(
-  "/:contactId/favorite",
-  controllerWrapper(ctrl.updateStatusContact)
+    "/:contactId/favorite",
+    controllerWrapper(ctrl.updateStatusContact)
 );
 
 module.exports = router;
