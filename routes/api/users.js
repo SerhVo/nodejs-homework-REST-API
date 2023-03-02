@@ -3,14 +3,18 @@ const router = express.Router();
 const {
   validation,
   controllerWrapper,
-  authenticate
+  authenticate,
+  upload 
 } = require("../../middlewares");
-const { users: ctrl } = require("../../controllers");
+const { users: ctrl } = require("../../controller");
 const { joiSchema } = require("../../models/user");
 
 router.post("/signup", validation(joiSchema), controllerWrapper(ctrl.signup));
 router.post("/login", validation(joiSchema), controllerWrapper(ctrl.login));
 router.get("/logout", authenticate, controllerWrapper(ctrl.logout));
 router.get("/current", authenticate, controllerWrapper(ctrl.currentUser));
+router.patch("/avatars", authenticate, upload.single("avatar"), controllerWrapper(ctrl.updateAvatar));
+router.get("/verify/:verificationToken", controllerWrapper(ctrl.verify));
+router.post("/verify", controllerWrapper(ctrl.secondVerify));
 
 module.exports = router;
